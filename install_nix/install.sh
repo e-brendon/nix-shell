@@ -9,20 +9,26 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 echo "Criando grupo 'nixbld' se não existir..."
-groupadd nixbld || true
+if ! getent group nixbld >/dev/null; then
+    groupadd nixbld
+fi
 
 echo "Criando usuários para 'nixbld'..."
 for i in {1..10}; do
-    useradd -m -s /usr/sbin/nologin -g nixbld nixbld$i || true
+    if ! id "nixbld$i" &>/dev/null; then
+        useradd -m -s /usr/sbin/nologin -g nixbld "nixbld$i"
+    fi
 done
 
-echo "Criando diretório /nix e ajustando permissões..."
-mkdir -p /nix
+echo "Garantindo permissões corretas..."
 chown root:nixbld /nix
 chmod 0755 /nix
+for i in {1..10}; do
+    usermod -aG nixbld "nixbld$i"
+done
 
-echo "Baixando e instalando o Nix..."
-curl -L https://nixos.org/nix/install | sh
+echo "Baixando e instalando o Nix em modo multiusuário..."
+sh <(curl -L https://nixos.org/nix/install) --daemon
 
 echo "Instalação do Nix concluída!"
-echo "Execute 'source /root/.nix-profile/etc/profile.d/nix.sh' para ativar o ambiente Nix imediatamente."
+echo "Execute 'source /etc/profile' para ativar o ambiente Nix imediatamente."
