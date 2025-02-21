@@ -1,4 +1,3 @@
-```markdown
 # Criando um Ambiente de Desenvolvimento com Nix e Python
 
 ## 📌 Introdução
