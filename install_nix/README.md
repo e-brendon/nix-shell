@@ -1,4 +1,4 @@
-# Guia de Instalação do Nix com Correção de UID e Shell Automático
+# Guia de Instalação do Nix
 
 Este documento explica o funcionamento do script `install.sh`, que instala o **Nix** no modo multiusuário, corrige problemas de UID/GID e inicia um shell interativo com o pacote `hello`.
 
