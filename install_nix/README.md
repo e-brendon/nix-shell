@@ -17,7 +17,7 @@ Este documento explica o funcionamento do script `install.sh`, que instala o **N
    ```
    Para ver a mensagem **"Hello, world!"**
 
-## 🔍 Explicação Técnica
+## Explicação Técnica
 
 - O script **verifica e cria** o grupo `nixbld`.
 - Ele **adapta os UIDs** existentes dos usuários `nixbldX` para evitar conflitos.
