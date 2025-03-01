@@ -35,6 +35,7 @@ else
 fi
 
 echo "Garantindo permissões corretas..."
+mkdir /nix
 chown root:nixbld /nix
 chmod 0755 /nix
 for i in {1..10}; do
